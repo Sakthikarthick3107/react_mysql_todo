@@ -35,6 +35,17 @@ app.get('/tasks' , (req,res) =>{
     })
 })
 
+app.get('/tasks/:id' , (req  , res) =>{
+    const sql = 'SELECT * from tasks WHERE id = ?';
+    const reqId =[ req.params.id];
+    db.query(sql , [reqId], (err,data )=>{
+        if(err){
+            throw err;
+        }
+        res.json(data);
+    })
+})
+
 
 app.post('/tasks' , (req , res) =>{
     const sql = 'INSERT INTO tasks(`task`)VALUES(?)';
